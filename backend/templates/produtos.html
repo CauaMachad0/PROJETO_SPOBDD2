@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Produtos{% endblock %} {% block
+content %}
+<h2>Produtos cadastrados</h2>
+<ul>
+  {% for p in produtos %}
+  <li>{{ p.nome }} - {{ p.categoria }} - {{ p.marca }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Cadastrar novo produto</h3>
+<form method="post" action="/produtos">
+  <input type="text" name="nome" placeholder="Nome do produto" required /><br />
+  <input type="text" name="categoria" placeholder="Categoria" /><br />
+  <input type="text" name="marca" placeholder="Marca" /><br />
+  <button type="submit">Cadastrar</button>
+</form>
+
+<a href="/">Voltar</a>
+{% endblock %}
