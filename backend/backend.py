@@ -1,15 +1,8 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
-from sqlalchemy.orm import Session
-from database import SessionLocal
-from models import Usuario
-
-import sys
-import os
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
+from backend.database import SessionLocal
+from backend.models import Usuario, Produto
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -31,8 +24,6 @@ def criar_usuario(nome: str = Form(...), email: str = Form(...), senha: str = Fo
     db.add(novo)
     db.commit()
     return RedirectResponse(url="/usuarios", status_code=303)
-
-from models import Usuario, Produto
 
 @app.get("/produtos")
 def listar_produtos(request: Request):
