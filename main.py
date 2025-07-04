@@ -5,6 +5,12 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 from models import Usuario
 
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
