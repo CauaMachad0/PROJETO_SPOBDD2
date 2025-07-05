@@ -1,16 +1,22 @@
 from sqlalchemy import Column, Integer, String
 from backend.database import Base
+from sqlalchemy.orm import mapped_column,registry,Mapped
+table_registry = registry()
 
-class Usuario(Base):
+
+@table_registry.mapped_as_dataclass
+class Usuario:
     __tablename__ = "usuario"
-    id = Column(Integer, primary_key=True, index=True)
-    nome = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-    senha = Column(String, nullable=False)
+    id:Mapped[int] = mapped_column(Integer, primary_key=True, index=True,init=False,autoincrement=True)
+    nome:Mapped[str] = mapped_column(String, nullable=False)
+    email:Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    senha:Mapped[str] = mapped_column(String, nullable=False)
 
-class Produto(Base):
+
+@table_registry.mapped_as_dataclass
+class Produto:
     __tablename__ = "produto"
-    id = Column(Integer, primary_key=True, index=True)
-    nome = Column(String, nullable=False)
-    categoria = Column(String, nullable=True)
-    marca = Column(String, nullable=True)
+    id:Mapped[int] = mapped_column(Integer, primary_key=True, index=True,init=False,autoincrement=True)
+    nome:Mapped[str] = mapped_column(String, nullable=False)
+    categoria:Mapped[str] = mapped_column(String, nullable=True)
+    marca:Mapped[str] = mapped_column(String, nullable=True)
